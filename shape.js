@@ -108,7 +108,7 @@ Shape.Engine = function (canvas) {
         canvas.width = window.innerWidth;
         this.width = canvas.width;
         this.height = canvas.height;
-        this.context.fillStyle = 'white';
+        // this.context.fillStyle = 'white';
         this.shapeFactory.resize();
     });
 };
@@ -129,6 +129,10 @@ Shape.Engine.prototype.checkLife = function () {
 Shape.Engine.prototype.clear = function () {
     return this._toShape([]);
 };
+
+Shape.Engine.prototype.clearNow = function () {
+
+}
 
 Shape.Engine.prototype.shake = function (time) {
     let promise = new Promise((resolve, reject) => {
@@ -172,7 +176,8 @@ Shape.Engine.prototype.genText = function (text) {
     return this.shapeFactory.genDotMap();
 };
 
-Shape.Engine.prototype.toText = function (text) {
+Shape.Engine.prototype.toText = function (text, color) {
+    this.context.fillStyle = color
     let points = this.genText(text);
     return this._toShape(points);
 };
