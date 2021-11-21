@@ -13,9 +13,9 @@ html, body {
 }
 
 body {
-    background: -webkit-linear-gradient(top,#cbebdb 0,#3794c0 120%);
-    background: -moz-linear-gradient(top,#cbebdb 0,#3794c0 120%);
-    background: -o-linear-gradient(top,#cbebdb 0,#3794c0 120%);
-    background: -ms-linear-gradient(top,#cbebdb 0,#3794c0 120%);
-    background: linear-gradient(top,#cbebdb 0,#3794c0 120%);
+    background: -webkit-linear-gradient(top,#ffdde1 0,#ee9ca7 120%);
+    background: -moz-linear-gradient(top,#ffdde1 0,#ee9ca7 120%);
+    background: -o-linear-gradient(top,#ffdde1 0,#ee9ca7 120%);
+    background: -ms-linear-gradient(top,#ffdde1 0,#ee9ca7 120%);
+    background: linear-gradient(top,#ffdde1 0,#ee9ca7 120%);
 }
