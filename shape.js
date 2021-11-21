@@ -51,8 +51,8 @@ Shape.point.prototype.shake = function () {
 };
 
 Shape.prototype.resize = function () {
-    var canvas = this.canvas;
-    var context = this.context;
+    let canvas = this.canvas;
+    let context = this.context;
     canvas.height = window.innerHeight;
     canvas.width = window.innerWidth;
     canvas.style.height = window.innerHeight;
@@ -63,14 +63,14 @@ Shape.prototype.resize = function () {
 };
 
 Shape.prototype.genDotMap = function () {
-    var canvas = this.canvas;
-    var context = this.context;
-    var data = context.getImageData(0, 0, canvas.width, canvas.height).data;
-    var dotc = [];
-    var dotGap = this.dotGap;
-    for (var y = 0; y < canvas.height; y += dotGap) {
-        for (var x = 0; x< canvas.width; x += dotGap) {
-            if (data[y * canvas.width * 4 + x * 4] != 0) {
+    let canvas = this.canvas;
+    let context = this.context;
+    let data = context.getImageData(0, 0, canvas.width, canvas.height).data;
+    let dotc = [];
+    let dotGap = this.dotGap;
+    for (let y = 0; y < canvas.height; y += dotGap) {
+        for (let x = 0; x< canvas.width; x += dotGap) {
+            if (data[y * canvas.width * 4 + x * 4] !== 0) {
                 dotc.push(new Shape.point(x, y));
             }
         }
@@ -79,11 +79,11 @@ Shape.prototype.genDotMap = function () {
 };
 
 Shape.prototype.text = function(str) {
-    var context = this.context;
-    var canvas = this.canvas;
-    var fontSize = this.fontSize;
+    let context = this.context;
+    let canvas = this.canvas;
+    let fontSize = this.fontSize;
     context.font = 'bold 30px sans-serif';
-    var size = Math.min(0.22 * fontSize / context.measureText(str).width * canvas.width, 0.6 * canvas.height);
+    let size = Math.min(0.22 * fontSize / context.measureText(str).width * canvas.width, 0.6 * canvas.height);
     context.font = 'bold ' + Math.floor(size) + 'px sans-serif';
     console.log(size);
     context.clearRect(0, 0, canvas.width, canvas.height);
@@ -131,17 +131,17 @@ Shape.Engine.prototype.clear = function () {
 };
 
 Shape.Engine.prototype.shake = function (time) {
-    var promise = new Promise((resolve, reject) => {
+    let promise = new Promise((resolve, reject) => {
         time = time || 1000;
-        var context = this.context;
-        var width  = this.width;
-        var height = this.height;
-        var engine = this;
-        var points = this.points;
+        let context = this.context;
+        let width  = this.width;
+        let height = this.height;
+        let engine = this;
+        let points = this.points;
 
-        var totalProgress = 0.0;
-        var step = 25 / time;
-        var timer = setInterval(function(){
+        let totalProgress = 0.0;
+        let step = 25 / time;
+        let timer = setInterval(function(){
             if (totalProgress >= 1.0) {
                 clearInterval(timer);
                 timer = null;
@@ -173,12 +173,12 @@ Shape.Engine.prototype.genText = function (text) {
 };
 
 Shape.Engine.prototype.toText = function (text) {
-    var points = this.genText(text);
+    let points = this.genText(text);
     return this._toShape(points);
 };
 
 Shape.Engine.prototype.shuffle = function () {
-    var points = this.points;
+    let points = this.points;
     for (let i = points.length - 1; i > 0; i -= 1) {
         let j = Math.floor(Math.random() * (i + 1))
         let temp = points[i];
@@ -188,15 +188,15 @@ Shape.Engine.prototype.shuffle = function () {
 }
 
 Shape.Engine.prototype._toShape = function (targets) {
-    var promise = new Promise((resolve, reject) => {
+    let promise = new Promise((resolve, reject) => {
 
-        var context = this.context;
-        var width  = this.width;
-        var height = this.height;
-        var engine = this;
-        var points = this.points;
+        let context = this.context;
+        let width  = this.width;
+        let height = this.height;
+        let engine = this;
+        let points = this.points;
 
-        var len = Math.min(targets.length, points.length);
+        let len = Math.min(targets.length, points.length);
         for (let i = 0; i < len; i++) {
             points[i].targetX = targets[i].x;
             points[i].targetY = targets[i].y;
@@ -218,16 +218,16 @@ Shape.Engine.prototype._toShape = function (targets) {
             }
         }
 
-        var totalProgress = 0.0;
-        var timer = setInterval(function(){
+        let totalProgress = 0.0;
+        let timer = setInterval(function(){
             if (totalProgress >= 1.0) {
                 clearInterval(timer);
                 timer = null;
                 totalProgress = 1.0;
             }
             context.clearRect(0, 0, width, height);
-//            var progress = totalProgress * totalProgress;
-            var progress = (2 - totalProgress) * totalProgress;
+//            let progress = totalProgress * totalProgress;
+            let progress = (2 - totalProgress) * totalProgress;
 
             points.forEach((point) => {
                 point.update(progress);
